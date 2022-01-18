@@ -21,6 +21,7 @@ def create_cost_function(
     stop_time: float,
     step_size: float,
     post_simulation_function: FunctionType,
+    show_output: bool = False
 ):
     def f(
         filename: str,
@@ -30,6 +31,7 @@ def create_cost_function(
         stop_time: float,
         step_size: float,
         post_simulation_function: FunctionType,
+        show_output: bool,
         x,
     ):
         start_values = {k: v for k, v in zip(input_names, x)}
@@ -43,7 +45,7 @@ def create_cost_function(
             output=output_names,
             record_events=False,
             fmi_call_logger = None,
-            logger=None 
+            logger = None if show_output else empty_logger 
         )
         return post_simulation_function(results)
 
@@ -64,4 +66,5 @@ def create_cost_function(
         stop_time,
         step_size,
         post_simulation_function,
+        show_output
     )
