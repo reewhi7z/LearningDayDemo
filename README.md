@@ -17,6 +17,19 @@ If you're running this on your local pc (not Simcenter Studio), please follow th
     ```
 
 5. Install the required Python packages
-    ```
+    ```bash
     $ pip install fmpy[complete] plotly scipy ipython jupyter
     ```
+
+
+# Running the example Notebooks
+
+To run the notebooks, please change the FMU filename to match your OS (Win or Linux) and make sure you're connected to the Siemens network (either on the VPN or be on the office network). The Flomaster FMUs need to connect to a license server to run
+
+
+# The fmpy GUI
+
+If you're running this on your pc/laptop and want to show the fmpy GUI that was shown in the demo, run the following with your virtual environment activated:
+```bash
+$ python -m fmpy.gui
+```
