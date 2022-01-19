@@ -1,6 +1,5 @@
-from types import FunctionType
+from types import FunctionType, LambdaType
 from typing import Tuple
-from functools import partial
 
 import fmpy
 from fmpy import validation
@@ -22,7 +21,7 @@ def create_cost_function(
     step_size: float,
     post_simulation_function: FunctionType,
     show_output: bool = False
-):
+) -> LambdaType:
     def f(
         filename: str,
         input_names: Tuple[str],
@@ -57,8 +56,7 @@ def create_cost_function(
     # extract the FMU
     unzipdir = fmpy.extract(filename)
 
-    return partial(
-        f,
+    return lambda x : f(
         unzipdir,
         input_names,
         output_names,
@@ -66,5 +64,18 @@ def create_cost_function(
         stop_time,
         step_size,
         post_simulation_function,
-        show_output
+        show_output,
+        x
     )
+
+    # return partial(
+    #     f,
+    #     unzipdir,
+    #     input_names,
+    #     output_names,
+    #     start_time,
+    #     stop_time,
+    #     step_size,
+    #     post_simulation_function,
+    #     show_output
+    # )
